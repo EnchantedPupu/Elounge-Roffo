@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(!isset($_SESSION["user"])){
+        $_SESSION["user"] = "guest";
+    }
+
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -13,7 +21,7 @@
             <div class="row bg-light py-3 px-4 align-items-center">
                 
                 <div class="col-auto">
-                    <span>Welcome, <strong>&lt;username&gt;</strong></span>
+                    <span>Welcome, <strong><?php echo $_SESSION["user"]; ?></strong></span>
                 </div>
                 <div class="col-auto ms-auto">
                 <a href="#" class="btn btn-modern me-2">Edit Profile</a>
@@ -23,10 +31,20 @@
                     <a href="#" class="btn btn-modern">Contact Us</a>
                 </div>
                 <div class="col-auto">
-                    <a href="logout.php" class="btn btn-outline-secondary btn-sm d-flex align-items-center">
-                        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" alt="Logout Icon" style="width: 16px; height: 16px; margin-right: 4px;">
-                        Log Out
-                    </a>
+                    <?php 
+                        if ($_SESSION["user"] == "guest") {
+                            echo '<a href="user/login.php" class="btn btn-outline-secondary btn-sm d-flex align-items-center">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" alt="Login Icon" style="width: 16px; height: 16px; margin-right: 4px;">
+                                Log In
+                            </a>';
+                        }
+                        else{
+                            echo '<a href="user/logout.php" class="btn btn-outline-secondary btn-sm d-flex align-items-center">
+                                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" alt="Logout Icon" style="width: 16px; height: 16px; margin-right: 4px;">
+                                Log Out
+                            </a>';
+                        }
+                    ?>
                 </div>
             </div>
             <!-- Main Content -->
