@@ -9,57 +9,84 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
+        <script src="script.js"> defer</script>
     </head>
     <body>
-        <div class="container-fluid p-0">
-            <!-- Top Bar -->
-            <div class="row bg-light py-3 px-4 align-items-center">
-                
-                <div class="col-auto">
-                    <span>Welcome, <strong><?php echo $_SESSION["user"]; ?></strong></span>
-                </div>
-                <div class="col-auto ms-auto">
-                <a href="#" class="btn btn-modern me-2">Edit Profile</a>
-                    <a href="#" class="btn btn-modern me-2">New Booking</a>
-                    <a href="#" class="btn btn-modern me-2">View Booking History</a>
-                    <a href="#" class="btn btn-modern me-2">About Us</a>
-                    <a href="#" class="btn btn-modern">Contact Us</a>
-                </div>
-                <div class="col-auto">
-                    <?php 
-                        if ($_SESSION["user"] == "guest") {
-                            echo '<a href="user/login.php" class="btn btn-outline-secondary btn-sm d-flex align-items-center">
-                                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" alt="Login Icon" style="width: 16px; height: 16px; margin-right: 4px;">
-                                Log In
-                            </a>';
-                        }
-                        else{
-                            echo '<a href="user/logout.php" class="btn btn-outline-secondary btn-sm d-flex align-items-center">
-                                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" alt="Logout Icon" style="width: 16px; height: 16px; margin-right: 4px;">
-                                Log Out
-                            </a>';
-                        }
-                    ?>
-                </div>
-            </div>
-            <!-- Main Content -->
-            <div class="row">
-                <div class="col p-0">
-                    <div class="main-content d-flex flex-column justify-content-center align-items-center text-black" style="height: 100vh; background-image: url('bg-pic.png'); background-size: cover; background-position: center; ">
-                        <div class="content-box text-center p-4">
-                            <h1 class="display-4 text-center">Student Lounge e-Booking System</h1>
-                            <h2 class="mt-3">KOLEJ RAFFLESIA</h2>
-                            <p>UNIVERSITI MALAYSIA SARAWAK</p>
+        <header>
+            <nav class="navbar">
+                <span class="hamburger-btn material-symbols-rounded">Menu</span>
+                <a href="#" class="logo">
+                    <img src="img/unimas-logo.png" alt="logo">
+                    <h2>Welcome User!</h2>
+                </a>
+                <ul class="links">
+                    <span class="close-btn material-symbols-rounded">Close</span>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Map</a></li>
+                    <li><a href="#">New Booking</a></li>
+                </ul>
+                <button class="login-btn">Log In</button>
+            </nav>
+        </header>
+
+        
+
+        <div class="blur-bg-overlay"></div>
+        <div class="form-popup">
+            <span class="close-btn material-symbols-rounded">Close</span>
+
+            <div class="form-box login">
+                <div class="form-content">
+                    <h2>LOGIN</h2>
+                    <form action="#">
+                        <div class="input-field">
+                            <input type="text" required>
+                            <label>Email</label>
                         </div>
-                        
+                        <div class="input-field">
+                            <input type="password" required>
+                            <label>Password</label>
+                        </div>
+                        <a href="#" id="forgot-pass-link">Forgot Password?</a>
+                        <button type="submit">Log In</button>
+                    </form>
+                    <div class="bottom-link">
+                        New here? Register Here!
+                        <a href="#" id="register-link">Signup</a>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="form-box signup">
+                <div class="form-content">
+                        <h2>REGISTER</h2>
+                        <form action="#">
+                            <div class="input-field">
+                                <input type="text" required>
+                                <label>Enter Email</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="password" required>
+                                <label>Create Password</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="password" required>
+                                <label>Confirm Password</label>
+                            </div>
+                            <button type="submit">Log In</button>
+                        </form>
+                        <div class="bottom-link">
+                            Already a user? <a href="#" id="login-link">Log In </a>Here!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
     </body>
 </html>
