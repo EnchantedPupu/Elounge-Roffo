@@ -39,4 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formPopup.classList[link.id === 'register-link' ? 'add' : 'remove']("show-signup");
         });
     });
+
+
+    //BELOW IS ALL JQUERY
 });

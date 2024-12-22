@@ -1,6 +1,6 @@
 use elounge;
 
-insert into users (name, email, password, isadmin, sex, profile_pic) values
+insert into users (name, email, password, isadmin, gender, profile_pic) values
 ('John Doe', 'nobody@example.com', '123456', 0, 'male', 'default.jpg'),
 ('Jane Doe', 'jane@example.com', '123456', 0, 'female', 'default.jpg'),
 ('Admin', 'admin@ex.com', '123456', 1, 'male', 'default.jpg');

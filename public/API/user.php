@@ -1,16 +1,35 @@
 <?php
-    include_once "../../utils.php";
+    class User{
+        private $conn;
+        private $table_name = "users";
 
-    $database = create_new_database_connection();
-
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        //GET ALL USERS
-        $query = "SELECT * FROM users";
-        $result = $database->query($query);
-        $users = [];
-        while ($row = $result->fetch_assoc()) {
-            $users[] = $row;
+        public function __construct($db){
+            $this->conn = $db;
         }
-        echo json_encode($users);
+
+        public function login($email, $password){
+            $query = "SELECT * FROM " . $this->table_name . " WHERE email = '$email'";
+            $result = $this->conn->query($query);
+            $row = $result->fetch_assoc();
+            if(password_verify($password, $row["password"])){
+                session_start();
+                $_SESSION["user"] = $row["name"];
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function signup($name, $email, $password, $gender){
+            $isadmin = 0;
+            $profile_picture = "default.jpg";
+            $query = "INSERT INTO " . $this->table_name . " (name, email, password, isadmin, gender, profile_pic) VALUES ('$name', '$email', '$password', $isadmin, '$gender', '$profile_picture')";
+            $this->conn->query($query);
+            $_SESSION["user"] = $name;
+        }
+
+
+        // public function signup($name, $email, $password, $gender){
+
     }
 ?>

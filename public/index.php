@@ -23,7 +23,7 @@
                 <span class="hamburger-btn material-symbols-rounded">Menu</span>
                 <a href="#" class="logo">
                     <img src="img/unimas-logo.png" alt="logo">
-                    <h2>Welcome User!</h2>
+                    <h2>Welcome, <?php echo $_SESSION["user"] ?>!</h2>
                 </a>
                 <ul class="links">
                     <span class="close-btn material-symbols-rounded">Close</span>
@@ -32,7 +32,13 @@
                     <li><a href="#">Map</a></li>
                     <li><a href="#">New Booking</a></li>
                 </ul>
-                <button class="login-btn">Log In</button>
+                <?php 
+                    if($_SESSION["user"] === "guest"){
+                        echo '<button class="login-btn">Log In</button>';
+                    } else {
+                        echo '<form action="user/logout.php"><button class="logout-btn">Log Out</button></form>';
+                    }
+                ?>
             </nav>
         </header>
 
@@ -45,13 +51,13 @@
             <div class="form-box login">
                 <div class="form-content">
                     <h2>LOGIN</h2>
-                    <form action="#">
+                    <form action="user/login.php" method="post">
                         <div class="input-field">
-                            <input type="text" required>
+                            <input type="text" name="email" required>
                             <label>Email</label>
                         </div>
                         <div class="input-field">
-                            <input type="password" required>
+                            <input type="password" name="password" required>
                             <label>Password</label>
                         </div>
                         <a href="#" id="forgot-pass-link">Forgot Password?</a>

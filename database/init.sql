@@ -7,7 +7,7 @@ create table users (
     email varchar(255) not null,
     password varchar(255) not null,
     isadmin int default 0,
-    sex varchar(255) not null,
+    gender varchar(255) not null,
     profile_pic varchar(255) not null,
     created_at timestamp default current_timestamp
 );
@@ -38,7 +38,7 @@ create table bookings (
 create table transactions (
     id int primary key auto_increment,
     booking_id int not null,
-    amount int not null,
+    amount float not null,
     transactions_type varchar(255) not null,
     status varchar(255) not null,
     created_at timestamp default current_timestamp
