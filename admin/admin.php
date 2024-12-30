@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION["user"])){
-        $_SESSION["user"] = "guest";
+        $_SESSION["user"] = "Admin";
     }
 
 ?>
@@ -16,9 +16,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/public/style.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="script.js" defer></script>
+        <script src="/public/script.js" defer></script>
     </head>
     <body>
         <header>
@@ -31,9 +31,9 @@
                 <ul class="links">
                     <span class="close-btn material-symbols-rounded">Close</span>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#about-section">About Us</a></li>
-                    <li><a href="#map-section">Map</a></li>
-                    <li><a href="API/booking.php">Make a Booking</a></li>
+                    <li><a href="#about-section">Generate Report</a></li>
+                    <li><a href="#map-section">Manage User</a></li>
+                    <li><a href="API/booking.php">Manage Student Lounge</a></li>
                 </ul>
                 <?php 
                     if($_SESSION["user"] === "guest"){
