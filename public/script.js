@@ -204,7 +204,9 @@ document.addEventListener('DOMContentLoaded', () => {
         formPopup.querySelector('.forgot-password').style.display = 'block';
     });
 
+    // Select elements
     
+
 
     
 });

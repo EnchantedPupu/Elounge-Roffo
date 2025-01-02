@@ -54,8 +54,11 @@ main {
     position: relative;
     z-index: 1;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     
 }
+
 
 main::before {
     content: "";
@@ -202,9 +205,10 @@ main::before {
     padding: 20px;
     background-color: #ffffff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 40%;
+    width: fit-content;
+    max-width: 1000px;
     height: fit-content;
-    margin-left: 30%;
+    margin-left: 25px;
     background-color: rgba(255, 255, 255, 0.8);
 }
 
@@ -215,6 +219,24 @@ main::before {
     width: 80%;
 
 
+}
+
+/* Hide placeholder text for date input fields */
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+    color: transparent;
+}
+
+/* Hide placeholder text for date input fields in Firefox */
+input[type="date"]::-moz-placeholder {
+    color: transparent;
+}
+
+/* Hide placeholder text for date input fields in Internet Explorer and Edge */
+input[type="date"]::-ms-input-placeholder {
+    color: transparent;
 }
 
 .navbar {
@@ -746,4 +768,267 @@ footer {
 
 .footer-section .contact i {
     margin-right: 10px;
+}
+
+.formbold-form-btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.formbold-form-wrapper {
+    margin: 0 auto;
+    max-width: 1000px;
+    height: max-content;
+    width: fit-content;
+    
+}
+
+.formbold-main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+
+.formbold-steps {
+    padding-bottom: 18px;
+    margin-bottom: 35px;
+    border-bottom: 1px solid #DDE3EC;
+}
+
+.formbold-steps ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+
+.formbold-steps li {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #536387;
+}
+
+.formbold-steps li.active {
+    color: blue;;
+}
+
+.formbold-steps li.active span {
+    background: #6A64F1;
+    color: #FFFFFF;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+
+.formbold-input-flex {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+.formbold-input-flex > div {
+    width: 50%;
+}
+.formbold-form-input {
+    width: 100%;
+    padding: 13px 22px;
+    border: 1px solid #717171;
+    border-radius: 10px;
+    background: #FFFFFF;
+    font-weight: 500;
+    font-size: 16px;
+    color: #536387;
+    outline: none;
+    resize: none;
+}
+.formbold-form-input:focus {
+    border: 1px solid #00bcd4;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+.formbold-checkbox-input {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1px solid #717171;
+    outline: none;
+    cursor: pointer;
+}
+
+.formbold-checkbox-input:checked {
+    background-color: #00bcd4;
+    border-color: #00bcd4;
+}
+
+.formbold-form-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: 5px dotted grey;
+    border-radius: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px; /* Adjust as needed */
+    margin-bottom: 10px;
+    
+}
+
+.formbold-form-summary-label {
+    flex: 1;
+    text-align: left;
+    font-weight: bold;
+}
+
+.input {
+    flex: 1;
+    text-align: right;
+}
+
+.formbold-form-summary > div {
+    padding: 5px;
+    align-items: center;
+}
+
+.formbold-form-summary p {
+    margin: 10px 0;
+}
+
+.formbold-form-summary-label {
+    font-weight: bold;
+    color: #011429;
+}
+
+.formbold-form-input:is(:focus, :valid)~label {
+    transform: translateY(-120%);
+    color: #00bcd4;
+    font-size: 0.75rem;
+}
+.formbold-form-label {
+    color: #07074D;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.formbold-form-confirm {
+    border-bottom: 1px solid #DDE3EC;
+    padding-bottom: 35px;
+}
+.formbold-form-confirm p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #536387;
+    margin-bottom: 22px;
+    width: 75%;
+}
+.formbold-form-confirm > div {
+    display: flex;
+    gap: 15px;
+}
+
+.formbold-confirm-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #FFFFFF;
+    border: 0.5px solid #DDE3EC;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 24px;
+    color: #536387;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: all .3s ease-in-out;
+}
+.formbold-confirm-btn {
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.12);
+}
+.formbold-confirm-btn.active {
+    background: #6A64F1;
+    color: #FFFFFF;
+}
+
+.formbold-form-step-1,
+.formbold-form-step-2,
+.formbold-form-step-3,
+.formbold-form-step-4,
+.formbold-form-step-5 {
+    display: none;
+}
+.formbold-form-step-1.active,
+.formbold-form-step-2.active,
+.formbold-form-step-3.active,
+.formbold-form-step-4.active,
+.formbold-form-step-5.active {
+    display: block;
+}
+
+.formbold-form-btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 25px;
+    margin-top: 25px;
+}
+.formbold-back-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    font-weight: 500;
+    background-color: #ff0000;
+    color: white;
+    cursor: pointer;
+    width: fit-content;
+    display: none;
+    
+}
+.formbold-back-btn.active {
+    display: block;
+    
+}
+.formbold-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    font-weight: 500;
+    background-color: #6A64F1;
+    color: white;
+    cursor: pointer;
+    width: fit-content;
+}
+.formbold-btn:hover {
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.05);
+    background-color: #4f4baf;
+
 }

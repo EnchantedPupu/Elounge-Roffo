@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION["user"])){
-        $_SESSION["user"] = "guest";
+        $_SESSION["user"] = "Syl";
     }
 
 ?>
@@ -22,7 +22,7 @@
     </head>
     <body>
         <header>
-            <nav class="navbar" >
+            <nav class="navbar">
                 
                 <span class="hamburger-btn material-symbols-rounded">Menu</span>
                 <a href="#" class="logo" >
@@ -35,7 +35,7 @@
                     <li><a href="#map-section">Map</a></li>
                     <li><a href="API/booking.php">Make a Booking</a></li>
                 </ul>
-                <?php 
+                <?php
                     if($_SESSION["user"] === "guest"){
                         echo '<button class="login-btn">Log In</button>';
                     } else {
