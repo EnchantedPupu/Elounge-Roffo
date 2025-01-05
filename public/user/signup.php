@@ -1,25 +1,24 @@
 <?php
     include_once "../../utils.php";
+    include_once "../API/user.php";
 
-    $is_post_request = $_SERVER["REQUEST_METHOD"] === "POST";
+    $is_post_request = $_SERVER["REQUEST_METHOD"] === "GET";
 
-    $name = $_POST["name"] ?? false;
-    $email = $_POST["email"] ?? false;
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT) ?? false; //password_verify($password, $hash)
+    $name = "User";
+    $email = $_GET["email"] ?? false;
+    $password = password_hash($_GET["password"], PASSWORD_DEFAULT);
     $isadmin = 0;
-    $gender = $_POST["gender"] ?? false;
+    $gender = $_GET["gender"] ?? false;
     $profile_picture = "default.jpg";
 
     if ($is_post_request) {
-        if($name && $email && $password && $gender){
-            $database = create_new_database_connection();
-            $query = "INSERT INTO users (name, email, password, isadmin, gender, profile_pic) VALUES ('$name', '$email', '$password', $isadmin, '$gender', '$profile_picture')";
-            $database->query($query);
-            echo json_encode(["message" => "User created successfully"]);
-            session_start();
-            $_SESSION["user"] = $name;
-         } else {
-            echo json_encode(["message" => "User not created"]);
+        $db = create_new_database_connection();
+        $user = new User($db);
+        if($user->signup($name, $email, $password, $gender)){
+            header('Content-Type: application/json');
+            echo json_encode(array("message" => "success"));
+        } else {
+            echo json_encode(array("message" => "failed"));
         }
     }
 ?>

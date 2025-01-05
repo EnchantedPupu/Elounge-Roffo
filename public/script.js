@@ -88,26 +88,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //send registration data
             $.ajax({
-                url: '/public/index.php',
-                type: 'POST',
+                url: '/public/user/signup.php',
+                type: 'GET',
                 contentType: 'application/json',
-                data: JSON.stringify({
+                data: {
                     email: email,
                     password: password,
-                    gender: gender
-                }),
-                success: function(response) {
-                    if (response.success) {
-                        alert('Registration Successful! Redirecting...');
-                        window.location.href = response.redirectUrl || '/public/index.php';
-                    }   else {
-                        alert(response.message || 'Registration Failed! Please try again later!');
-                    }
+                    gender: gender,
                 },
-                error: function() {
-                    alert('An error occurred. Please try again later!');
+                success: function (response) {
+                    if (response.message === 'success') {
+                        alert('Registration Successful! Redirecting...');
+                        window.location.href = '/public/index.php';
+                    }
+                    else {
+                        alert(response.message || 'An error occured. Please try again!');
+                    }
                 }
-            });
+            })
         });
     })
 
@@ -135,17 +133,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //send login data
             $.ajax({
-                url: '/public/index.php',
-                type: 'POST',
+                url: '/public/user/login.php',
+                type: 'GET',
                 contentType: 'application/json',
-                data: JSON.stringify({
+                data: {
                     email: email,
                     password: password,
-                }),
+                },
                 success: function (response) {
-                    if (response.success) {
+                    if (response.message === 'success') {
                         alert('Login Successful! Redirecting...');
-                        window.location.href = response.redirectUrl || '/public/user/login.php';
+                        window.location.href = response.redirectUrl || '/public/index.php';
                     }   else {
                         alert(response.message || 'Invalid credentials! Please try again.');
                     }

@@ -6,20 +6,21 @@
 
     $user = new User($database);
 
-    $is_post_request = $_SERVER["REQUEST_METHOD"] === "POST";
-    $email = $_POST["email"] ?? false;
-    $password = $_POST["password"] ?? false;
+    $is_post_request = $_SERVER["REQUEST_METHOD"] === "GET";
+    $email = $_GET["email"] ?? false;
+    $password = $_GET["password"] ?? false;
 
     if ($is_post_request) {
         if($email && $password){
             if($user->login($email, $password)){
-                echo json_encode(["message" => "Login successful"]);
-                header("Location: ../index.php");
+                header('Content-Type: application/json');
+                echo json_encode(array("message" => "success"));
             } else {
-                echo json_encode(["message" => "Login failed - Invalid email or password"]);
-                header("Location: /testsignup.php");
+                header('Content-Type: application/json');
+                echo json_encode(array("message" => "failed"));
             }
         } else {
+            header('Content-Type: application/json');
             echo json_encode(["message" => "There are missing fields"]);
         }
     }
