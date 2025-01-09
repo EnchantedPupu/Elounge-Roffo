@@ -55,7 +55,7 @@ formSubmitBtn.addEventListener('click', function (event) {
             return false;
         }
         if (date < today) {
-            alert('Date should not be in the past!');
+            alert('Date should not be empty or in the past!');
             return false;
         }
 
@@ -134,7 +134,7 @@ function sendBookingData() {
         data: JSON.stringify(bookingData),
         success: function (response) {
             alert('Booking successful!');
-            window.location.href = response.redirectUrl || 'booking.php';
+            window.location.href = response.redirectUrl || '/public/index.php';
         },
         error: function (xhr, status, error) {
             alert('Booking failed: ' + error);

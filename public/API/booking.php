@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION["user"])){
-        $_SESSION["user"] = "Syl";
+        $_SESSION["user"] = "guest";
     }
     
 ?>
@@ -24,14 +24,16 @@
     <body>
         <header>
             <nav class="navbar">
-                <span class="hamburger-btn material-symbols-rounded">Menu</span>
+                <span class="hamburger-btn material-symbols-rounded" style="color:black">Menu</span>
                 <a href="#" class="logo">
                     <h2>Welcome, <?php echo $_SESSION["user"] ?>!</h2>
                 </a>
-                <ul class="links" style="padding-left: 225px;">
+                <ul class="links">
                     <span class="close-btn material-symbols-rounded">Close</span>
                     <li><a href="/public/index.php">Home</a></li>
+                    <li><a href="/public/user/userprofile.php">Edit Profile</a></li>
                     <li><a href="booking.php">Make a Booking</a></li>
+                    <li><a href="viewbooking.php">View All Booking</a></li>
                 </ul>
                 <?php //nel ubah ni supaya dia logout jaa sbab booking will always available for logged in user only
                     if($_SESSION["user"] === "guest"){
@@ -206,9 +208,10 @@
                                             <span class="formbold-form-summary-label">Extra Request:</span>
                                             <div class="input"><span id="summary-extra">[NOT PROVIDED]</span></div>
                                         </div>
-        
+                                        
                                     </div>
                                 </div>
+                                <p>*The booking summary will be sent to your email</p>
                             </div>
                             
                             

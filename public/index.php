@@ -9,13 +9,15 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <title>Rafflesia Student Lounge eBooking</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=menu" />
         <link rel="stylesheet" href="style.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="script.js" defer></script>
@@ -24,22 +26,32 @@
         <header>
             <nav class="navbar">
                 
-                <span class="hamburger-btn material-symbols-rounded">Menu</span>
+                <span class="hamburger-btn material-symbols-rounded" style="color: black">Menu</span>
                 <a href="#" class="logo" >
                     <h2>Welcome, <?php echo $_SESSION["user"] ?>!</h2>
                 </a>
-                <ul class="links">
-                    <span class="close-btn material-symbols-rounded">Close</span>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about-section">About Us</a></li>
-                    <li><a href="#map-section">Map</a></li>
-                    <li><a href="API/booking.php">Make a Booking</a></li>
-                </ul>
                 <?php
                     if($_SESSION["user"] === "guest"){
+                        
+                        echo '<ul class="links">
+                        <span class="close-btn material-symbols-rounded">Close</span>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about-section">About Us</a></li>
+                        <li><a href="#map-section">Map</a></li>
+                        </ul>';
                         echo '<button class="login-btn">Log In</button>';
                     } else {
-                        echo '<button class="logout-btn">Log Out</button>';
+                        
+                        echo '<ul class="links">
+                        <span class="close-btn material-symbols-rounded">Close</span>
+                        <li><a href="/public/index.php">Home</a></li>
+                        <li><a href="/public/user/userprofile.php">View Profile</a></li>
+                        <li><a href="/public/API/booking.php">Make a Booking</a></li>
+                        <li><a href="/public/API/viewbooking.php">View All Booking</a></li>
+                        <li><a href="#about-section">About Us</a></li>
+                        <li><a href="#map-section">Map</a></li>
+                        </ul>';
+                        echo '<button class="logout-btn" id="logout-btn">Log Out</button>';
                     }
                 ?>
             </nav>
@@ -86,7 +98,7 @@
 
         <div class="blur-bg-overlay"></div>
         <div class="form-popup">
-            <span class="close-btn material-symbols-rounded">Close</span>
+            <span class="close-btn material-symbols-rounded" style="color:black">Close</span>
 
             <div class="form-box login">
                 <div class="form-content">
