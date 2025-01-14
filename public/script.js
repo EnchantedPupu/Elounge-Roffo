@@ -63,26 +63,26 @@ document.addEventListener('DOMContentLoaded', () => {
             //email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                alert("Please enter a valid email address!");
+                showAlert("Please enter a valid email address!");
                 return;
             }
 
             //password validation
             const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
             if (!passwordRegex.test(password)) {
-                alert('Password must be at least 8 characters long, include at least one uppercase letter, one number, and one special character.');
+                showAlert('Password must be at least 8 characters long, include at least one uppercase letter, one number, and one special character.');
                 return;
             }
 
             //confirm password validation
             if (password !== confirmPassword) {
-                alert("Password do not match! Please try again");
+                showAlert("Password do not match! Please try again");
                 return;
             }
 
             //gender selection validation
             if (!gender) {
-                alert('Please choose your gender!');
+                showAlert('Please choose your gender!');
                 return;
             }
 
@@ -98,11 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 success: function (response) {
                     if (response.message === 'success') {
-                        alert('Registration Successful! Redirecting...');
-                        window.location.href = '/public/index.php';
+                        showAlert('Registration Successful! Redirecting...', () => {
+                            window.location.href = '/public/index.php';
+                        });
                     }
                     else {
-                        alert(response.message || 'An error occured. Please try again!');
+                        showAlert(response.message || 'An error occured. Please try again!');
                     }
                 }
             })
@@ -121,13 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
             //email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                alert ('Please enter a valid email address!');
+                showAlert('Please enter a valid email address!');
                 return;
             }
 
             //password validation
             if(password === '') {
-                alert('Password cannot be empty!');
+                showAlert('Password cannot be empty!');
                 return;
             }
 
@@ -142,14 +143,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 success: function (response) {
                     if (response.message === 'success') {
-                        alert('Login Successful! Redirecting...');
-                        window.location.href = response.redirectUrl || '/public/index.php';
+                        showAlert('Login successful! Redirecting...', () => {
+                            window.location.href = response.redirectUrl || '/public/index.php';
+                        });
                     }   else {
-                        alert(response.message || 'Invalid credentials! Please try again.');
+                        showAlert(response.message || 'Invalid credentials! Please try again.');
                     }
                 },
                 error: function() {
-                    alert('An error occured. Please try again!');
+                    showAlert('An error occured. Please try again!');
                 }
             });
         });
@@ -202,9 +204,37 @@ document.addEventListener('DOMContentLoaded', () => {
         formPopup.querySelector('.forgot-password').style.display = 'block';
     });
 
+    // Modal box functionality
+    
+
     // Select elements
     
 
 
+    // Alert box functionality
+    const alertBox = document.getElementById('alert-box');
+    const alertClose = document.getElementById('alert-close');
+    const alertMsg = document.getElementById('alert-msg');
+
+    // Function to show the alert box with a message
+    function showAlert(message, callback) {
+        alertMsg.textContent = message;
+        alertBox.style.display = 'block';
+        setTimeout(() => {
+            alertBox.style.display = 'none';
+            if (callback) callback();
+        }, 3000); // Show alert for 3 seconds
+    }
+
+    // Function to close the alert box
+    function closeAlert() {
+        alertBox.style.display = 'none';
+    }
+
+    // Close the alert box when the user clicks on <span> (x)
+    alertClose.addEventListener('click', closeAlert);
+
+    // Example usage of showAlert function (you can replace this with your own trigger)
+    // showAlert('This is an alert message!');
     
 });

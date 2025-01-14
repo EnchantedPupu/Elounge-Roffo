@@ -1,18 +1,14 @@
-use if0_38042764_elounge;
+create database elounge;
+use elounge;
 
 create table users (
     id int primary key auto_increment,
     name varchar(255) not null,
     email varchar(255) not null,
     password varchar(255) not null,
-    matric varchar(255) not null,
     isadmin int default 0,
     gender varchar(255) not null,
     profile_pic varchar(255) not null,
-    faculty varchar(255) not null,
-    phone varchar(255) not null,
-    residential varchar(255) not null,
-    bio varchar(255) not null,
     created_at timestamp default current_timestamp
 );
 
@@ -30,16 +26,12 @@ create table rooms (
 create table bookings (
     id int primary key auto_increment,
     user_id int not null,
-    fullname varchar(255) not null,
-    student_id int not null,
-    room_type varchar(255) not null,
-    book_date varchar(255) not null,
-    durationhour int not null,
-    purpose varchar(255) not null,
-    total_person int not null,
-    extra varchar(255) not null,
-    booking_time varchar(255) not null,
+    room_id int not null,
+    date date not null,
     approval varchar(255) not null,
+    check_in date not null,
+    check_out date not null,
+    total_person int not null,
     created_at timestamp default current_timestamp
 );
 
@@ -51,3 +43,6 @@ create table transactions (
     status varchar(255) not null,
     created_at timestamp default current_timestamp
 );
+
+create user 'elounge'@'localhost' identified by '123456';
+grant select, insert, update, delete on * to 'elounge'@'localhost';
