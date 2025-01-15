@@ -423,6 +423,7 @@ main::before {
     font-weight: 300;
     opacity: 0.8;
     margin-bottom: 8px;
+    font-style: italic;
 }
 
 .profile-details {
@@ -537,7 +538,9 @@ main::before {
     text-align: left;
 }
 
-.edit-profile input,
+.edit-profile select,
+.edit-profile input[type="text"],
+.edit-profile input[type="email"],
 .edit-profile textarea {
     display: block;
     width: 100%;
@@ -776,6 +779,7 @@ form .input-field {
     border: none;
     cursor: pointer;
     width: 20px;
+    display: block;
 }
 
 .input-field .toggle-password .toggle-icon{

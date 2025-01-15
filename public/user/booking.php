@@ -22,6 +22,8 @@ $db->close();
 <html lang="en">
 
 <head>
+    <title>Booking Page</title>
+    <link rel="icon" href="/public/webicon.png" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
         integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
