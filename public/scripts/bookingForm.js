@@ -154,13 +154,24 @@ $(document).ready(function () {
     const alertBox = document.getElementById('alert-box');
     const alertClose = document.getElementById('alert-close');
     const alertMsg = document.getElementById('alert-msg');
+    const body = document.body;
 
     // Function to show the alert box with a message
     function showAlert(message, callback) {
         alertMsg.textContent = message;
         alertBox.style.display = 'block';
+        
+        const blurOverlay = document.createElement('div');
+        blurOverlay.className = 'blur-overlay';
+        blurOverlay.id = 'blur-overlay';
+        body.appendChild(blurOverlay);
+
         setTimeout(() => {
-            alertBox.style.display = 'none';
+            alertBox.style.display = 'none'; 
+            const overlay = document.getElementById('blur-overlay');
+            if (overlay) {
+                overlay.remove();
+            }
             if (callback) callback();
         }, 3000); // Show alert for 3 seconds
     }
@@ -168,6 +179,10 @@ $(document).ready(function () {
     // Function to close the alert box
     function closeAlert() {
         alertBox.style.display = 'none';
+        const overlay = document.getElementById('blur-overlay');
+        if (overlay) {
+            overlay.remove();
+        }
     }
 
     // Close the alert box when the user clicks on <span> (x)

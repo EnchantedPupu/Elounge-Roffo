@@ -7,6 +7,42 @@ $(document).ready(function () {
         this.style.display = 'none'; // Hide the edit button
     });
 
+    const alertBox = document.getElementById('alert-box');
+    const alertClose = document.getElementById('alert-close');
+    const alertMsg = document.getElementById('alert-msg');
+    const body = document.body;
+
+    // Function to show the alert box with a message
+    function showAlert(message, callback) {
+        alertMsg.textContent = message;
+        alertBox.style.display = 'block';
+        
+        const blurOverlay = document.createElement('div');
+        blurOverlay.className = 'blur-overlay';
+        blurOverlay.id = 'blur-overlay';
+        body.appendChild(blurOverlay);
+
+        setTimeout(() => {
+            alertBox.style.display = 'none'; 
+            const overlay = document.getElementById('blur-overlay');
+            if (overlay) {
+                overlay.remove();
+            }
+            if (callback) callback();
+        }, 3000); // Show alert for 3 seconds
+    }
+
+    // Function to close the alert box
+    function closeAlert() {
+        alertBox.style.display = 'none';
+        const overlay = document.getElementById('blur-overlay');
+        if (overlay) {
+            overlay.remove();
+        }
+    }
+
+    // Close the alert box when the user clicks on <span> (x)
+    alertClose.addEventListener('click', closeAlert);
     $("#save-edit").on("click", function(e) {
         e.preventDefault(); // Prevent the default form submission
         
@@ -25,32 +61,32 @@ $(document).ready(function () {
         let isValid = true;
         //form validation
         if (!$("#name").val().trim()) {
-            alert("Please enter a name");
+            showAlert("Please enter a name");
             isValid = false;
         }
 
         if (!$("#email").val().trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#email").val())) {
-            alert("A valid email is required.");
+            showAlert("A valid email is required.");
             isValid = false;
         }
         if (!$("#faculty").val().trim()) {
-            alert("Faculty is required.");
+            showAlert("Faculty is required.");
             isValid = false;
         }
         if (!$("#matric").val().trim() || !/^\d+$/.test($("#matric").val())) {
-            alert("A valid matric number is required.");
+            showAlert("A valid matric number is required.");
             isValid = false;
         }
         if (!$("#phone").val().trim() || !/^\d{10,15}$/.test($("#phone").val())) {
-            alert("A valid phone number is required.");
+            showAlert("A valid phone number is required.");
             isValid = false;
         }
         if (!$("#block").val().trim()) {
-            alert("Block is required.");
+            showAlert("Block is required.");
             isValid = false;
         }
         if (!$("#bio").val().trim() || $("#bio").val().split(" ").length > 10) {
-            alert("Bio should not exceed 10 words.");
+            showAlert("Bio should not exceed 10 words.");
             isValid = false;
         }
 
@@ -63,13 +99,13 @@ $(document).ready(function () {
             contentType: false,
             data: formData,
             success: function(response) {
-                alert("Profile updated successfully!");
+                showAlert("Profile updated successfully!");
                 window.location.href = 'userprofile.php';
                 
             },
             error: function(xhr, status, error) {
                 console.error("Error: "+error);
-                alert("There was an error updating the profile");
+                showAlert("There was an error updating the profile");
             }
         });
     });
@@ -144,7 +180,7 @@ $(document).ready(function () {
             },
             error: function(xhr, status, error) {
                 console.error("Error: "+error);
-                alert("There was an error retrieving the booking stats");
+                showAlert("There was an error retrieving the booking stats");
             }
         });
     } else {
