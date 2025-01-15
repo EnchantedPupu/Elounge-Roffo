@@ -138,6 +138,20 @@ $pendingBookings = $conn->query("SELECT b.*, u.name as user_name FROM bookings b
 
 // Fetch rooms
 $rooms = $conn->query("SELECT * FROM rooms ORDER BY created_at DESC");
+
+// Fetch all bookings
+$allBookingsQuery = "SELECT b.*, u.name as user_name FROM bookings b JOIN users u ON b.user_id = u.id";
+if ($filter_status) {
+    $allBookingsQuery .= " WHERE b.approval = ?";
+}
+$allBookingsQuery .= " ORDER BY b.created_at DESC";
+
+$allBookingsStmt = $conn->prepare($allBookingsQuery);
+if ($filter_status) {
+    $allBookingsStmt->bind_param("s", $filter_status);
+}
+$allBookingsStmt->execute();
+$allBookings = $allBookingsStmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -228,6 +242,11 @@ $rooms = $conn->query("SELECT * FROM rooms ORDER BY created_at DESC");
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#rooms">
                                 <i class="bi bi-door-open"></i> Rooms
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#allBookings">
+                                <i class="bi bi-list"></i> View All Bookings
                             </a>
                         </li>
                     </ul>
@@ -326,7 +345,7 @@ $rooms = $conn->query("SELECT * FROM rooms ORDER BY created_at DESC");
                                     <tr>
                                         <th>ID</th>
                                         <th>User</th>
-                                        <th>Room Type</th>
+                                        <th>Room Name</th>
                                         <th>Date</th>
                                         <th>Duration</th>
                                         <th>Purpose</th>
@@ -407,6 +426,57 @@ $rooms = $conn->query("SELECT * FROM rooms ORDER BY created_at DESC");
                                                 <button class="btn btn-sm btn-danger"
                                                     onclick="deleteRoom(<?php echo $room['id']; ?>)">Delete</button>
                                             </td>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View All Bookings Section -->
+                <div class="card mt-4" id="allBookings">
+                    <div class="card-header bg-white">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <h5 class="mb-0">All Bookings</h5>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <select class="form-select" id="bookingStatusFilter" onchange="filterBookings()">
+                                        <option value="">All Statuses</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="approved">Approved</option>
+                                        <option value="rejected">Rejected</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>User</th>
+                                        <th>Room Name</th>
+                                        <th>Date</th>
+                                        <th>Duration</th>
+                                        <th>Purpose</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php while ($booking = $allBookings->fetch_assoc()): ?>
+                                        <tr>
+                                            <td><?php echo $booking['id']; ?></td>
+                                            <td><?php echo htmlspecialchars($booking['user_name']); ?></td>
+                                            <td><?php echo htmlspecialchars($booking['room_type']); ?></td>
+                                            <td><?php echo htmlspecialchars($booking['book_date']); ?></td>
+                                            <td><?php echo $booking['durationhour']; ?> hours</td>
+                                            <td><?php echo htmlspecialchars($booking['purpose']); ?></td>
+                                            <td><?php echo htmlspecialchars($booking['approval']); ?></td>
                                         </tr>
                                     <?php endwhile; ?>
                                 </tbody>

@@ -145,7 +145,7 @@ $db->close();
                                     <label for="roomselect" class="formbold-form-label">Room Selection</label>
                                     <select name="roomselect" id="roomselect" class="formbold-form-input">
                                         <?php foreach ($availableRooms as $room): ?>
-                                            <option value="<?php echo htmlspecialchars($room['id']); ?>">
+                                            <option value="<?php echo htmlspecialchars($room['name']); ?>">
                                                 <?php echo htmlspecialchars($room['name']); ?>
                                             </option>
                                         <?php endforeach; ?>

@@ -141,7 +141,7 @@ $bio = $data["bio"] ?? "Not set";
 
                                             <label for="faculty">Faculty:</label>
                                             <input type="text" id="faculty" name="faculty" placeholder="Enter faculty" value="<?php echo $faculty; ?>"><br>
-
+                                        
                                             <label for="matric">Matric Number:</label>
                                             <input type="text" id="matric" name="matric" placeholder="Enter matric number" value="<?php echo $matric; ?>"><br>
 

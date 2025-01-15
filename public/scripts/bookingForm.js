@@ -119,7 +119,7 @@ $(document).ready(function () {
         let bookingData = {
             fullname: document.getElementById('fullname').value || '[NOT PROVIDED]',
             studentId: document.getElementById('studentid').value || '[NOT PROVIDED]',
-            roomType: document.getElementById('roomtype').value || '[NOT PROVIDED]',
+            roomType: document.getElementById('roomselect').value || '[NOT PROVIDED]',
             date: document.getElementById('date').value || '[NOT PROVIDED]',
             durationhour: document.getElementById('duration').value || '[NOT PROVIDED]',
             purpose: document.getElementById('purpose').value || '[NOT PROVIDED]',
